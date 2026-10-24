@@ -361,10 +361,13 @@ h2{font-size:clamp(32px,4.6vw,56px);font-weight:700;max-width:14em}
   .header__in{height:72px}
   .logo__big{font-size:30px}
   .burger{display:block}
-  .nav{position:fixed;inset:0;background:var(--bg);flex-direction:column;justify-content:center;gap:26px;font-size:24px;font-weight:600;opacity:0;visibility:hidden;transition:.3s var(--ease);z-index:25}
-  .nav.open{opacity:1;visibility:visible}
-  .nav__cta{font-size:16px;margin-top:10px}
-  .scrim{display:none}
+  .nav{position:fixed;top:0;right:0;bottom:0;width:min(80vw,320px);background:var(--bg);flex-direction:column;align-items:stretch;justify-content:flex-start;gap:6px;padding:92px 24px 28px;font-size:19px;font-weight:600;border-radius:28px 0 0 28px;box-shadow:-20px 0 50px -20px rgba(0,0,0,.35);transform:translateX(105%);visibility:hidden;transition:transform .4s var(--ease),visibility 0s .4s;z-index:25}
+  .nav.open{transform:none;visibility:visible;transition:transform .4s var(--ease),visibility 0s}
+  .nav a:not(.btn){padding:14px 4px;border-bottom:1px solid var(--line)}
+  .nav a:not(.btn)::after{display:none}
+  .nav__cta{font-size:16px;margin:18px 0 0;justify-content:center}
+  .scrim{position:fixed;inset:0;background:rgba(17,17,17,.4);opacity:0;visibility:hidden;transition:opacity .35s,visibility 0s .35s;z-index:19}
+  .scrim.show{opacity:1;visibility:visible;transition:opacity .35s}
 
   .hero{min-height:0;display:block;background:#e3e4e6}
   .hero__bg{position:relative;height:320px;inset:auto;overflow:hidden}

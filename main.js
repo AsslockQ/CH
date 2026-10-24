@@ -101,26 +101,66 @@
   });
   badge.textContent = 'Этап 4 из 5 · Подготовка к экспорту';
 
-  /* ---------- slider ---------- */
-  const sl = $('#slider'), prev = $('#prev'), next = $('#next');
-  const step = () => $('.slide', sl).getBoundingClientRect().width + 16;
-  const upd = () => {
-    prev.disabled = sl.scrollLeft < 8;
-    next.disabled = sl.scrollLeft + sl.clientWidth >= sl.scrollWidth - 8;
-  };
-  prev.addEventListener('click', () => sl.scrollBy({ left: -step(), behavior: 'smooth' }));
-  next.addEventListener('click', () => sl.scrollBy({ left: step(), behavior: 'smooth' }));
-  sl.addEventListener('scroll', upd, { passive: true });
-  sl.addEventListener('keydown', e => {
-    if (e.key === 'ArrowRight') sl.scrollBy({ left: step(), behavior: 'smooth' });
-    if (e.key === 'ArrowLeft') sl.scrollBy({ left: -step(), behavior: 'smooth' });
+  /* ---------- carousel (бесконечная, автопрокрутка, точки) ---------- */
+  const sl = $('#slider'), prev = $('#prev'), next = $('#next'), dotsEl = $('#dots');
+  const orig = $$('.slide', sl), N = orig.length;
+  const mk = (n, cls) => { const c = n.cloneNode(true); c.setAttribute('aria-hidden', 'true'); c.dataset.clone = cls; return c; };
+  orig.slice().reverse().forEach(n => sl.prepend(mk(n, 'b')));
+  orig.forEach(n => sl.append(mk(n, 'a')));
+  sl.classList.add('js-car');
+  const all = () => $$('.slide', sl);
+  const gap = 16;
+  const sw = () => orig[0].offsetWidth + gap;
+  const setW = () => N * sw();                    // ширина одного набора
+  const noSnap = fn => { sl.style.scrollSnapType = 'none'; fn(); requestAnimationFrame(() => requestAnimationFrame(() => sl.style.scrollSnapType = '')); };
+  const startPos = () => noSnap(() => sl.scrollLeft = setW());
+  const curIdx = () => Math.round(sl.scrollLeft / sw()) - N;   // индекс относительно оригиналов (может быть вне 0..N-1)
+  const idx = () => ((curIdx() % N) + N) % N;
+  const dots = orig.map((_, i) => {
+    const b = document.createElement('button');
+    b.setAttribute('aria-label', 'Фото ' + (i + 1)); b.setAttribute('role', 'tab');
+    b.addEventListener('click', () => { goTo(i); restart(); });
+    dotsEl.appendChild(b); return b;
   });
-  // drag to scroll (мышь)
+  const mark = () => {
+    const i = idx(), c = Math.round(sl.scrollLeft / sw());
+    dots.forEach((d, k) => d.classList.toggle('on', k === i));
+    all().forEach((s, k) => s.classList.toggle('is-cur', k === c));
+  };
+  const wrap = () => {                              // бесшовный переход через клоны
+    const w = setW();
+    if (sl.scrollLeft < w * .5) noSnap(() => sl.scrollLeft += w);
+    else if (sl.scrollLeft > w * 1.5) noSnap(() => sl.scrollLeft -= w);
+  };
+  const goTo = i => { const t = (N + i) * sw(); sl.scrollTo({ left: t, behavior: 'smooth' }); };
+  const by = d => sl.scrollTo({ left: Math.round(sl.scrollLeft / sw() + d) * sw(), behavior: 'smooth' });
+  let scrollT;
+  sl.addEventListener('scroll', () => { mark(); clearTimeout(scrollT); scrollT = setTimeout(wrap, 120); }, { passive: true });
+  prev.addEventListener('click', () => { by(-1); restart(); });
+  next.addEventListener('click', () => { by(1); restart(); });
+  sl.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') { by(1); restart(); }
+    if (e.key === 'ArrowLeft') { by(-1); restart(); }
+  });
+  // перетаскивание мышью
   let down = false, sx = 0, sl0 = 0;
-  sl.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse') return; down = true; sx = e.clientX; sl0 = sl.scrollLeft; sl.style.scrollSnapType = 'none'; });
+  sl.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse') return; down = true; sx = e.clientX; sl0 = sl.scrollLeft; sl.style.scrollSnapType = 'none'; sl.style.cursor = 'grabbing'; });
   addEventListener('pointermove', e => { if (down) sl.scrollLeft = sl0 - (e.clientX - sx); });
-  addEventListener('pointerup', () => { if (!down) return; down = false; sl.style.scrollSnapType = ''; });
-  upd(); addEventListener('resize', upd);
+  addEventListener('pointerup', () => {
+    if (!down) return; down = false; sl.style.cursor = '';
+    sl.style.scrollSnapType = ''; by(0);
+  });
+  // автопрокрутка: пауза при наведении, фокусе, скрытой вкладке и reduced-motion
+  let autoT, hover = false;
+  const play = () => { clearInterval(autoT); if (reduce) return; autoT = setInterval(() => { if (!hover && !down && !document.hidden) by(1); }, 4200); };
+  const restart = play;
+  sl.addEventListener('mouseenter', () => hover = true);
+  sl.addEventListener('mouseleave', () => hover = false);
+  sl.addEventListener('focusin', () => hover = true);
+  sl.addEventListener('focusout', () => hover = false);
+  addEventListener('resize', () => { startPos(); mark(); });
+  addEventListener('load', () => { startPos(); mark(); });
+  startPos(); mark(); play();
 
   /* ---------- calculator ---------- */
   const price = $('#carPrice'), inv = $('#invoice'), FEE = 11000;

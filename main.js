@@ -7,7 +7,12 @@
 
   /* ---------- mobile menu ---------- */
   const burger = $('#burger'), nav = $('#nav');
+  const scrim = document.createElement('div');
+  scrim.className = 'scrim';
+  document.body.appendChild(scrim);
+  scrim.addEventListener('click', () => setMenu(false));
   const setMenu = open => {
+    scrim.classList.toggle('show', open);
     nav.classList.toggle('open', open);
     burger.setAttribute('aria-expanded', open);
     document.body.style.overflow = open ? 'hidden' : '';
@@ -47,14 +52,32 @@
   };
   const card = $('#infocard'), title = $('#infoTitle'), text = $('#infoText');
   const hs = $$('.hs');
+  // позиция карточки рядом с нужной точкой (не перекрывает остальные точки и подписи)
+  const pos = { engine: ['3%', '14%'], ecu: ['19%', '17%'], salon: ['71%', '17%'], paint: ['33%', '41%'], crash: ['72%', '33%'] };
+  let cur = 'engine', timer;
   const pick = id => {
+    if (id === cur) return;
+    cur = id;
     hs.forEach(h => h.classList.toggle('is-active', h.dataset.id === id));
     card.classList.add('swap');
-    setTimeout(() => { [title.textContent, text.textContent] = spots[id]; card.classList.remove('swap'); }, 160);
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      [title.textContent, text.textContent] = spots[id];
+      card.style.setProperty('--cx', pos[id][0]); card.style.setProperty('--cy', pos[id][1]);
+      requestAnimationFrame(() => card.classList.remove('swap'));
+    }, 260);
   };
   hs.forEach(h => {
     h.addEventListener('click', () => pick(h.dataset.id));
     h.addEventListener('mouseenter', () => matchMedia('(hover:hover)').matches && pick(h.dataset.id));
+  });
+
+  /* ---------- этапы проверки: подсветка номера при наведении ---------- */
+  const lv = $$('.level');
+  lv.forEach(l => {
+    const on = () => { lv.forEach(x => x.classList.toggle('is-on', x === l)); };
+    l.addEventListener('mouseenter', on);
+    l.addEventListener('focusin', on);
   });
 
   /* ---------- generic accordions ---------- */

@@ -164,7 +164,20 @@ h2{font-size:clamp(32px,4.6vw,56px);font-weight:700;max-width:14em}
 /* steps */
 .steps{display:grid;grid-template-columns:1.45fr 1fr;gap:40px;margin-top:64px;align-items:stretch}
 .steps__list{border-top:1px solid var(--line)}
-.step{border-bottom:1px solid var(--line);transition:.4s var(--ease)}
+.step{position:relative;border-bottom:1px solid var(--line);transition:.4s var(--ease)}
+.step::before{content:"";position:absolute;inset:0 -24px;border-radius:26px;background:var(--dark);opacity:0;transition:opacity .3s;z-index:-1;pointer-events:none}
+.js .step.reveal{transform:translateX(var(--sx,0));transition:opacity .8s var(--ease) var(--d,0s),transform .8s var(--ease) var(--d,0s),background .4s,border-radius .4s,padding .4s,margin .4s}
+.js .step.reveal.in{transform:none}
+.steps__list{isolation:isolate}
+@media (hover:hover){
+  .step:not(.is-open):hover::before{opacity:1}
+  .step:not(.is-open):hover{border-color:transparent;color:#fff}
+  .step:not(.is-open):hover .step__n{color:var(--acc)}
+  .step:not(.is-open):hover .step__tag{color:#bbb}
+}
+.step:not(.is-open):focus-within::before{opacity:1}
+.step:not(.is-open):focus-within{color:#fff}
+.step:not(.is-open):focus-within .step__n{color:var(--acc)}
 .step__head{width:100%;display:grid;grid-template-columns:136px 1fr auto;align-items:center;gap:0;text-align:left;padding:14px 0 14px 4px;min-height:96px}
 .step__n{font-size:78px;font-weight:600;letter-spacing:-.05em;line-height:1;color:#d1d2d5;transition:color .3s}
 .step__t{font-size:22px;font-weight:600;letter-spacing:-.02em;line-height:1.2;max-width:15em}
@@ -174,6 +187,7 @@ h2{font-size:clamp(32px,4.6vw,56px);font-weight:700;max-width:14em}
 .step__body>*{overflow:hidden;min-height:0}
 .step__body p{font-size:15px;color:#c3c5c9;line-height:1.6;max-width:30em}
 .step__body .chip{display:inline-flex;margin:0 0 0;align-self:start;width:fit-content}
+.step.is-open::before{display:none}
 .step.is-open{background:var(--dark);color:#fff;border-radius:26px;border-color:transparent;margin:16px 0;padding:14px 30px 28px}
 .step.is-open .step__head{padding-left:0;min-height:90px}
 .step.is-open .step__n{color:var(--acc)}

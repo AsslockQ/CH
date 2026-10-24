@@ -301,8 +301,11 @@ h2{font-size:clamp(32px,4.6vw,56px);font-weight:700;max-width:14em}
 .msgs{display:flex;gap:12px;flex-wrap:wrap}
 .msg{display:inline-flex;align-items:center;gap:12px;background:#fff;border-radius:999px;padding:8px 20px 8px 8px;font-weight:500;font-size:14px;transition:.25s var(--ease)}
 .msg:hover{transform:translateY(-2px);box-shadow:0 10px 24px -14px rgba(0,0,0,.4)}
-.msg__i{width:36px;height:36px;border-radius:50%;background:#111;color:#fff;display:grid;place-items:center;font-style:normal;font-size:13px}
-.form{position:relative;display:flex;flex-direction:column;gap:12px}
+.msg__i{width:36px;height:36px;border-radius:50%;background:#111;color:#fff;display:grid;place-items:center;font-style:normal;font-size:13px;transition:background .25s var(--ease)}
+.msg__i svg{display:block;width:18px;height:18px}
+.msg__i--tg svg{transform:translateX(-1px)} /* визуальная центровка бумажного самолётика */
+.msg:hover .msg__i--wa{background:#25D366}
+.msg:hover .msg__i--tg{background:#2AABEE}.form{position:relative;display:flex;flex-direction:column;gap:12px}
 .field{position:relative}
 .field input{width:100%;height:54px;border:1.5px solid transparent;border-radius:14px;background:#fff;padding:0 18px;font:inherit;font-size:15px;color:#111;transition:border-color .2s,box-shadow .2s}
 .field input::placeholder{color:#7a7d82}

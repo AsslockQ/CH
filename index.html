@@ -104,7 +104,7 @@
         <p id="infoText">Двигатель, компрессия, цилиндры, ходовая и компьютерная диагностика — в составе экспертизы до 250 пунктов.</p>
       </div>
       <!-- x/y в процентах от рамки -->
-      <button class="hs is-active" data-id="engine" style="--x:22%;--y:46%" aria-label="Двигатель и компрессия"><span class="hs__dot"></span><span class="hs__line"></span></button>
+      <button class="hs is-active" data-id="engine" style="--x:22%;--y:46%" aria-label="Двигатель и компрессия"><span class="hs__dot"></span><span class="hs__line hs__line--down"></span><span class="hs__label hs__label--down">Двигатель и компрессия</span></button>
       <button class="hs" data-id="ecu" style="--x:46.2%;--y:32%" aria-label="Электронные блоки"><span class="hs__dot"></span><span class="hs__line hs__line--up"></span><span class="hs__label hs__label--up">Электронные блоки</span></button>
       <button class="hs" data-id="salon" style="--x:67.7%;--y:32%" aria-label="Салон"><span class="hs__dot"></span><span class="hs__line hs__line--up"></span><span class="hs__label hs__label--up">Салон</span></button>
       <button class="hs" data-id="paint" style="--x:59.3%;--y:53%" aria-label="ЛКП и толщиномер"><span class="hs__dot"></span><span class="hs__line hs__line--down"></span><span class="hs__label hs__label--down">ЛКП и толщиномер</span></button>
@@ -112,8 +112,8 @@
       <div class="bracket"><span>независимая экспертиза — до <b>250</b> пунктов</span></div>
     </div>
 
-    <ol class="levels reveal" id="levels">
-      <li class="level">
+    <ol class="levels" id="levels">
+      <li class="level reveal is-on" style="--d:0s">
         <span class="level__pt"></span>
         <div class="level__n">01</div>
         <h3>Проверка до бронирования</h3>
@@ -121,7 +121,7 @@
         <button class="acc__btn" aria-expanded="false"><span>Что запрашиваем у продавца</span><i class="plus"></i></button>
         <div class="acc__panel"><ul><li>Видео автомобиля со всех сторон</li><li>Фото VIN, шильдика и одометра</li><li>Фото повреждений и замеры ЛКП</li><li>Подтверждение комплектации</li></ul></div>
       </li>
-      <li class="level is-on">
+      <li class="level reveal" style="--d:.35s">
         <span class="level__pt"></span>
         <div class="level__n">02</div>
         <h3>Независимая экспертиза Chiboshi</h3>
@@ -129,7 +129,7 @@
         <button class="acc__btn" aria-expanded="false"><span>Полный список проверки</span><i class="plus"></i></button>
         <div class="acc__panel"><ul><li>Кузов, геометрия, толщина ЛКП</li><li>Двигатель, компрессия, КПП</li><li>Ходовая и тормозная системы</li><li>Компьютерная диагностика</li><li>Салон и электроника</li><li>Следы ДТП, пожара и затопления</li></ul></div>
       </li>
-      <li class="level">
+      <li class="level reveal" style="--d:.7s">
         <span class="level__pt"></span>
         <div class="level__n">03</div>
         <h3>Финальный контроль в Харбине</h3>

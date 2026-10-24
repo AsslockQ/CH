@@ -30,17 +30,20 @@
   const tio = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); }), { threshold: .4 });
   tio.observe($('#timeline'));
 
-  $$('[data-count]').forEach(el => {
-    if (reduce) return;
-    const to = +el.dataset.count, suf = el.dataset.suffix || '';
+  const cio = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target, to = +el.dataset.count, suf = el.dataset.suffix || '';
     const t0 = performance.now(), dur = 1200;
     const tick = t => {
       const p = Math.min(1, (t - t0) / dur), v = Math.round(to * (1 - Math.pow(1 - p, 3)));
       el.textContent = v + suf;
       if (p < 1) requestAnimationFrame(tick);
     };
-    el.textContent = '0' + suf; requestAnimationFrame(tick);
-  });
+    el.textContent = '0' + suf;
+    requestAnimationFrame(tick);
+    cio.unobserve(el);
+  }), { threshold: .2 });
+  $$('[data-count]').forEach(el => cio.observe(el));
 
   /* ---------- hotspots ---------- */
   const spots = {
@@ -86,8 +89,19 @@
   }));
 
   /* ---------- steps ---------- */
+  /* ---------- steps ---------- */
   const steps = $$('.step'), sImg = $('#stepsImg'), badge = $('#stepsBadge');
+  const sImgWrap = $('.steps__img'), stepsWrap = $('.steps');
   let stepTimer;
+
+  const placeStepImg = s => {
+    if (!s || !sImgWrap) return;
+    if (matchMedia('(max-width: 1000px)').matches) {
+      s.before(sImgWrap);
+    } else if (sImgWrap.parentElement !== stepsWrap) {
+      stepsWrap.appendChild(sImgWrap);
+    }
+  };
 
   const activateStep = (s, i) => {
     if (s.classList.contains('is-open')) return;
@@ -97,6 +111,7 @@
     });
     s.classList.add('is-open');
     $('.step__head', s).setAttribute('aria-expanded', 'true');
+    placeStepImg(s);
     const name = $('.step__t', s).textContent.trim();
     badge.textContent = `Этап ${i + 1} из 5 · ${name}`;
     sImg.classList.add('fade');
@@ -115,6 +130,9 @@
       if (matchMedia('(hover:hover)').matches) activateStep(s, i);
     });
   });
+
+  placeStepImg($('.step.is-open') || steps[0]);
+  addEventListener('resize', () => placeStepImg($('.step.is-open') || steps[0]));
   badge.textContent = 'Этап 1 из 5 · Получаем ваш запрос';
 
   /* ---------- carousel (бесконечная, автопрокрутка, точки) ---------- */

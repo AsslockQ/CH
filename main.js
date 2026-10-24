@@ -87,19 +87,35 @@
 
   /* ---------- steps ---------- */
   const steps = $$('.step'), sImg = $('#stepsImg'), badge = $('#stepsBadge');
+  let stepTimer;
+
+  const activateStep = (s, i) => {
+    if (s.classList.contains('is-open')) return;
+    steps.forEach(x => {
+      x.classList.remove('is-open');
+      $('.step__head', x).setAttribute('aria-expanded', 'false');
+    });
+    s.classList.add('is-open');
+    $('.step__head', s).setAttribute('aria-expanded', 'true');
+    const name = $('.step__t', s).textContent.trim();
+    badge.textContent = `Этап ${i + 1} из 5 · ${name}`;
+    sImg.classList.add('fade');
+    clearTimeout(stepTimer);
+    stepTimer = setTimeout(() => {
+      sImg.src = s.dataset.img;
+      sImg.style.objectPosition = s.dataset.pos;
+      sImg.classList.remove('fade');
+    }, 260);
+  };
+
   steps.forEach((s, i) => {
     const btn = $('.step__head', s);
-    btn.addEventListener('click', () => {
-      if (s.classList.contains('is-open')) return;
-      steps.forEach(x => { x.classList.remove('is-open'); $('.step__head', x).setAttribute('aria-expanded', 'false'); });
-      s.classList.add('is-open'); btn.setAttribute('aria-expanded', 'true');
-      const name = $('.step__t', s).textContent.trim();
-      badge.textContent = `Этап ${i + 1} из 5 · ${name}`;
-      sImg.classList.add('fade');
-      setTimeout(() => { sImg.src = s.dataset.img; sImg.style.objectPosition = s.dataset.pos; sImg.classList.remove('fade'); }, 260);
+    btn.addEventListener('click', () => activateStep(s, i));
+    s.addEventListener('mouseenter', () => {
+      if (matchMedia('(hover:hover)').matches) activateStep(s, i);
     });
   });
-  badge.textContent = 'Этап 4 из 5 · Подготовка к экспорту';
+  badge.textContent = 'Этап 1 из 5 · Получаем ваш запрос';
 
   /* ---------- carousel (бесконечная, автопрокрутка, точки) ---------- */
   const sl = $('#slider'), prev = $('#prev'), next = $('#next'), dotsEl = $('#dots');

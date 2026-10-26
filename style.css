@@ -186,7 +186,7 @@ h2{font-size:clamp(32px,4.6vw,56px);font-weight:700;max-width:14em}
 .step__body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s var(--ease);padding:0 0 0 140px}
 .step__body>*{overflow:hidden;min-height:0}
 .step__body p{font-size:15px;color:#c3c5c9;line-height:1.6;max-width:30em}
-.step__body .chip{display:inline-flex;margin:0 0 0;align-self:start;width:fit-content}
+.step__body .chip{display:inline-flex;margin:20px 0 0;align-self:start;width:fit-content}
 .step.is-open::before{display:none}
 .step.is-open{background:var(--dark);color:#fff;border-radius:26px;border-color:transparent;margin:16px 0;padding:14px 30px 28px}
 .step.is-open .step__head{padding-left:0;min-height:90px}

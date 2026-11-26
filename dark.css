@@ -433,3 +433,7 @@ h1,h2{overflow-wrap:break-word}
 .level:nth-child(1){background-image:url(img/car-front.jpg);background-position:35% 30%}
 .level::before{background:linear-gradient(180deg,rgba(7,10,15,.12) 0,rgba(7,10,15,.45) 38%,rgba(7,10,15,.92) 72%,rgba(7,10,15,.97) 100%)}
 .level:hover::before{opacity:.55}
+
+/* «15 – 20 минут»: «минут» отдельной строкой под цифрами, тот же шрифт и цвет, чуть крупнее */
+.col--time .big{display:block;white-space:nowrap}
+.col--time .big small{display:block;margin-top:.06em;font-size:.44em;font-weight:inherit;letter-spacing:inherit;line-height:1;color:#fff;-webkit-text-fill-color:#fff}

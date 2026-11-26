@@ -77,6 +77,13 @@
     l.addEventListener('mouseenter', on);
     l.addEventListener('focusin', on);
   });
+  // на телефоне нет наведения: подсвечиваем карточку, которая сейчас в центре экрана
+  if (matchMedia('(hover:none)').matches && 'IntersectionObserver' in window) {
+    const lio = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) lv.forEach(x => x.classList.toggle('is-on', x === e.target));
+    }), { rootMargin: '-45% 0px -45% 0px' });
+    lv.forEach(l => lio.observe(l));
+  }
 
   /* ---------- generic accordions ---------- */
   $$('.acc__btn').forEach(b => b.addEventListener('click', () => {

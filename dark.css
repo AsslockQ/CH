@@ -455,3 +455,34 @@ h1,h2{overflow-wrap:break-word}
   .stage>img{aspect-ratio:16/9;height:auto}
   .infocard{opacity:1;transform:none;pointer-events:auto}
 }
+
+/* блок 02: номера через opacity, а не rgba (перенос из локальной версии) */
+/* прозрачность через opacity, а не rgba: иначе у «4» просвечивают наложения контуров шрифта */
+.col__n{-webkit-text-stroke:0;color:#e8edf3;opacity:.24;transition:color .4s ease,opacity .4s ease,text-shadow .4s ease}
+.col:hover .col__n{color:var(--acc);opacity:1;text-shadow:0 0 28px rgba(120,175,255,.55)}
+
+/* этапы: плавное растягивание карточек (только десктоп с наведением) */
+@media (hover:hover){
+  .poster{transition:flex-grow .65s var(--ease),min-height .5s var(--ease),filter .45s ease,border-color .3s,transform .5s var(--ease)}
+}
+
+/* три уровня проверки: в покое темнее, при наведении (на телефоне: у карточки в центре экрана) светлеют */
+.level::before{background:linear-gradient(180deg,rgba(7,10,15,.52) 0,rgba(7,10,15,.72) 38%,rgba(7,10,15,.94) 72%,rgba(7,10,15,.98) 100%)}
+@media (hover:hover){
+  .level{filter:brightness(.4) saturate(.7)}
+  .level:hover{filter:none}
+  .level:hover::before{opacity:.6}
+}
+@media (hover:none){
+  .level{filter:brightness(.4) saturate(.7)}
+  .level.is-on{filter:none}
+  .js .level.reveal,.level{transition:filter .45s ease,opacity .8s var(--ease),transform .8s var(--ease)}
+}
+
+/* подписи точек и карточка на схеме: чуть крупнее (только десктоп) */
+@media (min-width:721px){
+  .hs__label{font-size:14.5px;padding:5px 12px;border-radius:7px}
+  .infocard{width:min(28%,340px);padding:20px 22px}
+  .infocard b{font-size:17px;margin-bottom:8px}
+  .infocard p{font-size:15px;line-height:1.55}
+}

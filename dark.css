@@ -437,3 +437,11 @@ h1,h2{overflow-wrap:break-word}
 /* «15 – 20 минут»: «минут» отдельной строкой под цифрами, тот же шрифт и цвет, чуть крупнее */
 .col--time .big{display:block;white-space:nowrap}
 .col--time .big small{display:block;margin-top:.06em;font-size:.44em;font-weight:inherit;letter-spacing:inherit;line-height:1;color:#fff;-webkit-text-fill-color:#fff}
+
+/* подписи точек и карточка на схеме: чуть крупнее (только десктоп) */
+@media (min-width:721px){
+  .hs__label{font-size:14.5px;padding:5px 12px;border-radius:7px}
+  .infocard{width:min(28%,340px);padding:20px 22px}
+  .infocard b{font-size:17px;margin-bottom:8px}
+  .infocard p{font-size:15px;line-height:1.55}
+}

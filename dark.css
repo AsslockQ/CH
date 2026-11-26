@@ -486,3 +486,13 @@ h1,h2{overflow-wrap:break-word}
   .infocard b{font-size:17px;margin-bottom:8px}
   .infocard p{font-size:15px;line-height:1.55}
 }
+
+
+/* этапы: плавный переход между свёрнутой и открытой карточкой */
+.poster__body{display:block;max-height:0;overflow:hidden;opacity:0;padding-top:0;padding-bottom:0;transition:max-height .6s var(--ease),opacity .4s ease,padding .6s var(--ease)}
+.poster.is-open .poster__body{max-height:320px;opacity:1;padding-bottom:28px;animation:none;transition:max-height .6s var(--ease) .1s,opacity .5s ease .2s,padding .6s var(--ease) .1s}
+@keyframes titleOpen{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes titleClose{from{opacity:0}to{opacity:1}}
+.poster.is-open .poster__t,.poster.is-open .poster__tag{animation:titleOpen .5s var(--ease) .15s both}
+.poster:not(.is-open) .poster__t{animation:titleClose .35s ease both}
+.poster__n{transition:color .4s,-webkit-text-stroke-width .4s,-webkit-text-stroke-color .4s}

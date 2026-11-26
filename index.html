@@ -7,8 +7,9 @@
 <meta name="description" content="Подбор, независимая экспертиза до 250 пунктов, подготовка и отправка автомобилей из Харбина. Работаем только с бизнесом.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap&subset=cyrillic" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=4">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap&subset=cyrillic" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=5">
+<link rel="stylesheet" href="dark.css?v=5">
 </head>
 <body>
 
@@ -34,19 +35,23 @@
 <!-- ============ 01 HERO ============ -->
 <section class="hero">
   <div class="hero__bg">
-    <img src="img/hero-car.jpg" alt="Автомобиль для экспорта из Китая" fetchpriority="high">
+    <img src="img/car-night.jpg" alt="Автомобиль для экспорта из Китая" fetchpriority="high">
     <div class="hero__blur"></div>
   </div>
   <div class="wrap hero__in">
     <div class="hero__text">
-      <h1>Экспорт автомобилей из Китая для дилеров и бизнеса</h1>
-      <p class="lead">Собственная инфраструктура в Китае: подбираем, проверяем, оформляем и готовим автомобили к отправке</p>
-      <a class="btn btn--accent btn--lg" href="#calc">Рассчитать поставку <span class="arrow">→</span></a>
+      <h1><span>Экспорт</span> автомобилей из&nbsp;Китая <span>для дилеров и&nbsp;бизнеса</span></h1>
     </div>
+    <div class="hero__bottom">
+      <div class="hero__cta">
+        <p class="lead">Собственная инфраструктура в Китае: подбираем, проверяем, оформляем и готовим автомобили к отправке</p>
+        <a class="btn btn--accent btn--lg" href="#calc">Рассчитать поставку <span class="arrow">→</span></a>
+      </div>
     <div class="stats" aria-label="Коротко о компании">
       <div class="stat"><b data-count="3" data-suffix="+">3+</b><span>года на рынке</span></div>
       <div class="stat stat--acc"><b data-count="250">250</b><span>пунктов проверки</span></div>
       <div class="stat"><b data-count="5">5</b><span>этапов сделки</span></div>
+    </div>
     </div>
   </div>
 </section>
@@ -56,34 +61,28 @@
   <div class="wrap">
     <div class="meta reveal"><span>02 / 09</span><i></i><span>Харбин</span></div>
     <div class="sec__head reveal">
-      <h2>Одна компания на всём пути в Китае</h2>
+      <h2><span>Одна компания</span> на всём пути в Китае</h2>
       <p class="muted">Подбор, экспертиза, сервис, логистика по Китаю и экспортные документы — внутри одной команды. Вы понимаете, кто отвечает за автомобиль на каждом этапе.</p>
     </div>
 
-    <div class="bento">
-      <div class="bento__col">
-        <figure class="photo photo--lg reveal">
-          <img src="img/office.jpg" alt="Команда обсуждает заказ в офисе" loading="lazy">
-          <figcaption class="glass"><b>Собственная база в Харбине</b><span>осмотр · автосервис · детейлинг · фотозона · команда на месте</span></figcaption>
-        </figure>
-        <div class="license reveal">
-          <div>
-            <h3>Официальная лицензия</h3>
-            <p>Компания официально зарегистрирована в Китае и имеет государственную бизнес-лицензию на ведение деятельности.</p>
-          </div>
-          <img src="img/license.jpg" alt="Государственная бизнес-лицензия компании" loading="lazy">
-        </div>
-      </div>
-      <div class="bento__col">
-        <div class="card card--time reveal">
-          <div class="big">15–20 <small>минут</small></div>
-          <p>и вы получаете первые подходящие варианты и материалы по вашему запросу</p>
-        </div>
-        <figure class="photo photo--tall reveal">
-          <img src="img/team.jpg" alt="Русскоговорящая команда в офисе в Китае" loading="lazy">
-        </figure>
-        <p class="cap reveal">Русскоговорящая команда в Китае</p>
-      </div>
+    <div class="cols">
+      <article class="col reveal" style="--img:url(img/office.jpg);--pos:30% 50%">
+        <span class="col__n">01</span>
+        <div class="col__t"><h3>Собственная база в Харбине</h3><p>осмотр · автосервис · детейлинг · фотозона · команда на месте</p></div>
+      </article>
+      <article class="col col--time reveal" style="--img:url(img/photozone.jpg);--pos:50% 50%">
+        <span class="col__n">02</span>
+        <div class="col__t"><div class="big">15–20 <small>минут</small></div><p>и вы получаете первые подходящие варианты и материалы по вашему запросу</p></div>
+      </article>
+      <article class="col reveal" style="--img:url(img/team.jpg);--pos:72% 50%">
+        <span class="col__n">03</span>
+        <div class="col__t"><h3>Русскоговорящая команда в Китае</h3><p>отвечаем на вопросы на русском и ведём заказ от запроса до отправки</p></div>
+      </article>
+      <article class="col col--lic reveal" style="--img:url(img/flag.jpg);--pos:40% 40%">
+        <span class="col__n">04</span>
+        <img class="col__doc" src="img/license.jpg" alt="Государственная бизнес-лицензия компании" loading="lazy">
+        <div class="col__t"><h3>Официальная лицензия</h3><p>Компания официально зарегистрирована в Китае и имеет государственную бизнес-лицензию на ведение деятельности.</p></div>
+      </article>
     </div>
   </div>
 </section>
@@ -94,7 +93,7 @@
     <div class="meta reveal"><span>03 / 09</span><i></i><span>проверка</span></div>
     <div class="sec__head sec__head--check reveal">
       <div>
-        <h2>Три уровня проверки до отправки</h2>
+        <h2><span>Три уровня</span> проверки до отправки</h2>
         <p class="muted">Один пропущенный дефект может стоить дилеру клиента. Поэтому мы проверяем автомобиль не один раз, а на разных этапах сделки.</p>
       </div>
       <div class="zh" aria-hidden="true">车辆检测</div>
@@ -103,18 +102,18 @@
 
   <div class="wrap">
     <div class="stage reveal" id="stage">
-      <img src="img/car-side.jpg" alt="Автомобиль сбоку с отметками зон проверки" loading="lazy">
+      <img src="img/car-dark-cold.jpg" alt="Автомобиль сбоку с отметками зон проверки" loading="lazy">
       <i class="guide guide--l"></i><i class="guide guide--r"></i>
       <div class="infocard" id="infocard" aria-live="polite">
         <b id="infoTitle">Двигатель и компрессия</b>
         <p id="infoText">Двигатель, компрессия, цилиндры, ходовая и компьютерная диагностика — в составе экспертизы до 250 пунктов.</p>
       </div>
       <!-- x/y в процентах от рамки -->
-      <button class="hs is-active" data-id="engine" style="--x:22%;--y:46%" aria-label="Двигатель и компрессия"><span class="hs__dot"></span><span class="hs__line hs__line--down"></span><span class="hs__label hs__label--down">Двигатель и компрессия</span></button>
-      <button class="hs" data-id="ecu" style="--x:46.2%;--y:32%" aria-label="Электронные блоки"><span class="hs__dot"></span><span class="hs__line hs__line--up"></span><span class="hs__label hs__label--up">Электронные блоки</span></button>
-      <button class="hs" data-id="salon" style="--x:67.7%;--y:32%" aria-label="Салон"><span class="hs__dot"></span><span class="hs__line hs__line--up"></span><span class="hs__label hs__label--up">Салон</span></button>
-      <button class="hs" data-id="paint" style="--x:59.3%;--y:53%" aria-label="ЛКП и толщиномер"><span class="hs__dot"></span><span class="hs__line hs__line--down"></span><span class="hs__label hs__label--down">ЛКП и толщиномер</span></button>
-      <button class="hs" data-id="crash" style="--x:83.5%;--y:59%" aria-label="Следы ДТП, пожара и затопления"><span class="hs__dot"></span><span class="hs__line hs__line--down"></span><span class="hs__label hs__label--down">Следы ДТП, пожара и затопления</span></button>
+      <button class="hs is-active" data-id="engine" style="--x:52%;--y:38%" aria-label="Двигатель и компрессия"><span class="hs__dot"></span><span class="hs__line hs__line--down"></span><span class="hs__label hs__label--down">Двигатель и компрессия</span></button>
+      <button class="hs" data-id="ecu" style="--x:62%;--y:31%" aria-label="Электронные блоки"><span class="hs__dot"></span><span class="hs__line hs__line--up"></span><span class="hs__label hs__label--up">Электронные блоки</span></button>
+      <button class="hs" data-id="salon" style="--x:71%;--y:27%" aria-label="Салон"><span class="hs__dot"></span><span class="hs__line hs__line--up"></span><span class="hs__label hs__label--up">Салон</span></button>
+      <button class="hs" data-id="paint" style="--x:85%;--y:45%" aria-label="ЛКП и толщиномер"><span class="hs__dot"></span><span class="hs__line hs__line--down"></span><span class="hs__label hs__label--down">ЛКП и толщиномер</span></button>
+      <button class="hs" data-id="crash" style="--x:48%;--y:60%" aria-label="Следы ДТП, пожара и затопления"><span class="hs__dot"></span><span class="hs__line hs__line--down"></span><span class="hs__label hs__label--down">Следы ДТП, пожара и затопления</span></button>
       <div class="bracket"><span>независимая экспертиза — до <b>250</b> пунктов</span></div>
     </div>
 
@@ -151,35 +150,29 @@
 <section class="sec" id="steps">
   <div class="wrap">
     <div class="meta reveal"><span>04 / 09</span><i></i><span>этапы поставки</span></div>
-    <h2 class="reveal h2--wide">От заявки до отправки автомобиля — пять понятных этапов</h2>
+    <h2 class="reveal h2--wide"><span>От заявки до отправки</span> автомобиля — пять понятных этапов</h2>
 
-    <div class="steps">
-      <ol class="steps__list" id="stepsList">
-        <li class="step reveal is-open" style="--sx:-60px;--d:0.00s" data-img="img/team.jpg" data-pos="50% 40%">
-          <button class="step__head" aria-expanded="true"><span class="step__n">01</span><span class="step__t">Получаем ваш запрос</span><span class="step__tag">15–20 минут</span></button>
-          <div class="step__body"><p>Вы присылаете параметры: марка, модель, бюджет, количество. Мы уточняем детали и берём запрос в работу.</p><span class="chip">Первые варианты и материалы</span></div>
-        </li>
-        <li class="step reveal" style="--sx:60px;--d:0.22s" data-img="img/gauge.jpg" data-pos="50% 50%">
-          <button class="step__head" aria-expanded="false"><span class="step__n">02</span><span class="step__t">Подбираем и проверяем варианты</span><span class="step__tag">до бронирования</span></button>
-          <div class="step__body"><p>Ищем автомобили под ваш запрос, запрашиваем у продавца видео и документы и проверяем всё до того, как просить деньги.</p><span class="chip">Подборка с фото и видео</span></div>
-        </li>
-        <li class="step reveal" style="--sx:-60px;--d:0.44s" data-img="img/seats.jpg" data-pos="40% 50%">
-          <button class="step__head" aria-expanded="false"><span class="step__n">03</span><span class="step__t">Фиксируем автомобиль и проводим экспертизу</span><span class="step__tag">отчёт</span></button>
-          <div class="step__body"><p>Бронируем автомобиль у продавца за свой счёт и проводим независимую экспертизу до 250 пунктов.</p><span class="chip">Отчёт экспертизы</span></div>
-        </li>
-        <li class="step reveal" style="--sx:60px;--d:0.66s" data-img="img/car-front.jpg" data-pos="30% 60%">
-          <button class="step__head" aria-expanded="false"><span class="step__n">04</span><span class="step__t">Готовим автомобиль к экспорту</span><span class="step__tag"></span></button>
-          <div class="step__body"><p>Автомобиль поступает на нашу базу в Харбине: финальный контроль, при необходимости техническая подготовка и детейлинг, согласованные опции и экспортные документы.</p><span class="chip"><i>✓</i> Готовый автомобиль и полный комплект документов</span></div>
-        </li>
-        <li class="step reveal" style="--sx:-60px;--d:0.88s" data-img="img/car-night.jpg" data-pos="60% 50%">
-          <button class="step__head" aria-expanded="false"><span class="step__n">05</span><span class="step__t">Отправляем к границе</span><span class="step__tag">Харбин → Суйфэньхэ</span></button>
-          <div class="step__body"><p>Перевозим автомобиль к границе и оформляем экспортные процедуры до нужной вам точки.</p><span class="chip">Статус и документы на руки</span></div>
-        </li>
-      </ol>
-      <div class="steps__img reveal">
-        <img id="stepsImg" src="img/team.jpg" alt="Команда на этапе получения запроса" style="object-position:50% 40%">
-        <span class="badge"><i class="dot"></i><span id="stepsBadge">Этап 1 из 5 · Получаем ваш запрос</span></span>
-      </div>
+    <div class="posters reveal" id="posters">
+      <article class="poster is-open" style="--img:url(img/team.jpg);--pos:50% 40%">
+        <button class="poster__head" aria-expanded="true"><span class="poster__n">01</span><span class="poster__t">Получаем ваш запрос</span><span class="poster__tag">15–20 минут</span></button>
+        <div class="poster__body"><p>Вы присылаете параметры: марка, модель, бюджет, количество. Мы уточняем детали и берём запрос в работу.</p><span class="chip">Первые варианты и материалы</span></div>
+      </article>
+      <article class="poster" style="--img:url(img/gauge.jpg);--pos:50% 50%">
+        <button class="poster__head" aria-expanded="false"><span class="poster__n">02</span><span class="poster__t">Подбираем и проверяем варианты</span><span class="poster__tag">до бронирования</span></button>
+        <div class="poster__body"><p>Ищем автомобили под ваш запрос, запрашиваем у продавца видео и документы и проверяем всё до того, как просить деньги.</p><span class="chip">Подборка с фото и видео</span></div>
+      </article>
+      <article class="poster" style="--img:url(img/seats.jpg);--pos:40% 50%">
+        <button class="poster__head" aria-expanded="false"><span class="poster__n">03</span><span class="poster__t">Фиксируем автомобиль и проводим экспертизу</span><span class="poster__tag">отчёт</span></button>
+        <div class="poster__body"><p>Бронируем автомобиль у продавца за свой счёт и проводим независимую экспертизу до 250 пунктов.</p><span class="chip">Отчёт экспертизы</span></div>
+      </article>
+      <article class="poster" style="--img:url(img/car-front.jpg);--pos:30% 60%">
+        <button class="poster__head" aria-expanded="false"><span class="poster__n">04</span><span class="poster__t">Готовим автомобиль к экспорту</span><span class="poster__tag"></span></button>
+        <div class="poster__body"><p>Автомобиль поступает на нашу базу в Харбине: финальный контроль, при необходимости техническая подготовка и детейлинг, согласованные опции и экспортные документы.</p><span class="chip"><i>✓</i> Готовый автомобиль и полный комплект документов</span></div>
+      </article>
+      <article class="poster" style="--img:url(img/car-dark-cold.jpg);--pos:60% 50%">
+        <button class="poster__head" aria-expanded="false"><span class="poster__n">05</span><span class="poster__t">Отправляем к границе</span><span class="poster__tag">Харбин → Суйфэньхэ</span></button>
+        <div class="poster__body"><p>Перевозим автомобиль к границе и оформляем экспортные процедуры до нужной вам точки.</p><span class="chip">Статус и документы на руки</span></div>
+      </article>
     </div>
   </div>
 </section>
@@ -209,7 +202,7 @@
 
 <!-- ============ 06 B2B ============ -->
 <section class="b2b" id="partner">
-  <img class="b2b__car" src="img/car-dark.jpg" alt="">
+  <img class="b2b__car" src="img/car-dark-cold.jpg" alt="">
   <div class="wrap b2b__in">
     <span class="pill"><i class="dot"></i>Работаем только с бизнесом · B2B</span>
     <h2>Решаем проблемы <em>ещё в Китае</em> — а не после прибытия автомобиля в Россию</h2>
@@ -333,6 +326,7 @@
   </div>
 </footer>
 
-<script src="main.js?v=4"></script>
+<script src="main.js?v=5"></script>
+<script src="fx.js?v=5"></script>
 </body>
 </html>

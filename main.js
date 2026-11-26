@@ -133,7 +133,7 @@
 
   placeStepImg($('.step.is-open') || steps[0]);
   addEventListener('resize', () => placeStepImg($('.step.is-open') || steps[0]));
-  badge.textContent = 'Этап 1 из 5 · Получаем ваш запрос';
+  if (badge) badge.textContent = 'Этап 1 из 5 · Получаем ваш запрос';
 
   /* ---------- carousel (бесконечная, автопрокрутка, точки) ---------- */
   const sl = $('#slider'), prev = $('#prev'), next = $('#next'), dotsEl = $('#dots');

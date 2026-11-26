@@ -448,3 +448,10 @@ h1,h2{overflow-wrap:break-word}
 
 /* таймлайн «расходы»: точки снова круглые */
 .tl i{border-radius:50%!important}
+
+/* телефон: карточка с описанием точки снова под картинкой (раньше обрезалась из-за aspect-ratio:16/9) */
+@media (max-width:720px){
+  .stage{aspect-ratio:auto;height:auto}
+  .stage>img{aspect-ratio:16/9;height:auto}
+  .infocard{opacity:1;transform:none;pointer-events:auto}
+}

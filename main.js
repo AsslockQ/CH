@@ -62,13 +62,8 @@
     if (id === cur) return;
     cur = id;
     hs.forEach(h => h.classList.toggle('is-active', h.dataset.id === id));
-    card.classList.add('swap');
-    clearTimeout(timer);
-    timer = setTimeout(() => {
-      [title.textContent, text.textContent] = spots[id];
-      card.style.setProperty('--cx', pos[id][0]); card.style.setProperty('--cy', pos[id][1]);
-      requestAnimationFrame(() => card.classList.remove('swap'));
-    }, 260);
+    [title.textContent, text.textContent] = spots[id];
+    card.style.setProperty('--cx', pos[id][0]); card.style.setProperty('--cy', pos[id][1]);
   };
   hs.forEach(h => {
     h.addEventListener('click', () => pick(h.dataset.id));

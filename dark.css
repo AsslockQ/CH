@@ -445,3 +445,6 @@ h1,h2{overflow-wrap:break-word}
   .infocard b{font-size:17px;margin-bottom:8px}
   .infocard p{font-size:15px;line-height:1.55}
 }
+
+/* таймлайн «расходы»: точки снова круглые */
+.tl i{border-radius:50%!important}

@@ -508,3 +508,8 @@ h1,h2{overflow-wrap:break-word}
 
 /* «минут» под «15 – 20»: свой межстрочный интервал и разрядка, не слипается с цифрами */
 .col--time .big small{display:block;margin-top:.22em;line-height:1.25;letter-spacing:.02em}
+
+/* подписи точек на схеме: разрядка и межстрочный интервал, чтобы слова не слипались */
+@media (min-width:721px){
+  .hs__label{letter-spacing:.015em;line-height:1.3;padding:6px 13px}
+}

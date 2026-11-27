@@ -516,6 +516,5 @@ h1,h2{overflow-wrap:break-word}
 
 /* подписи «Электронные блоки» и «Салон»: сдвиг влево, чтобы не налезали на соседние точки */
 @media (min-width:721px){
-  .hs[data-id="ecu"] .hs__label{transform:translateX(calc(-50% - 44px))}
-  .hs[data-id="salon"] .hs__label{transform:translateX(calc(-50% - 24px))}
+  .hs[data-id="ecu"] .hs__label{transform:translateX(calc(-50% - 56px))}
 }

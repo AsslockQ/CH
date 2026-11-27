@@ -496,3 +496,6 @@ h1,h2{overflow-wrap:break-word}
 .poster.is-open .poster__t,.poster.is-open .poster__tag{animation:titleOpen .5s var(--ease) .15s both}
 .poster:not(.is-open) .poster__t{animation:titleClose .35s ease both}
 .poster__n{transition:color .4s,-webkit-text-stroke-width .4s,-webkit-text-stroke-color .4s}
+
+/* большая кнопка: текст по центру, когда стрелки нет */
+.btn--lg{justify-content:center}

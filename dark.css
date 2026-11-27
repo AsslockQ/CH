@@ -499,3 +499,6 @@ h1,h2{overflow-wrap:break-word}
 
 /* большая кнопка: текст по центру, когда стрелки нет */
 .btn--lg{justify-content:center}
+
+/* большая кнопка без стрелки: симметричные отступы, текст ровно по центру */
+.btn--lg{padding-left:28px;padding-right:28px;justify-content:center;text-align:center}

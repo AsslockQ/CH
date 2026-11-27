@@ -502,3 +502,6 @@ h1,h2{overflow-wrap:break-word}
 
 /* кнопка в шапке: текст по центру */
 .nav__cta{justify-content:center;text-align:center}
+
+/* кнопка на первом экране: текст по центру (симметричные отступы, стрелки нет) */
+.hero .btn--lg{padding-left:28px;padding-right:28px;justify-content:center;text-align:center}

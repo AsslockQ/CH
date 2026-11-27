@@ -505,3 +505,6 @@ h1,h2{overflow-wrap:break-word}
 
 /* кнопка на первом экране: текст по центру (симметричные отступы, стрелки нет) */
 .hero .btn--lg{padding-left:28px;padding-right:28px;justify-content:center;text-align:center}
+
+/* «минут» под «15 – 20»: свой межстрочный интервал и разрядка, не слипается с цифрами */
+.col--time .big small{display:block;margin-top:.22em;line-height:1.25;letter-spacing:.02em}

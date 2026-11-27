@@ -499,3 +499,6 @@ h1,h2{overflow-wrap:break-word}
 
 /* большая кнопка: текст по центру, когда стрелки нет */
 .btn--lg{justify-content:center}
+
+/* кнопка в шапке: текст по центру */
+.nav__cta{justify-content:center;text-align:center}

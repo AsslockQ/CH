@@ -181,12 +181,12 @@ h2 span{font-weight:300;color:rgba(200,220,245,.55)}
 .stat{border-left-color:rgba(190,215,255,.16)}
 
 @media (min-width:721px){
-  .hero{min-height:max(860px,100svh)}
+  .hero{min-height:max(640px,100svh)}
   .hero__bg img{right:0;left:0;top:0;width:100%;height:100%;object-fit:cover;object-position:50% 58%;transform:scale(1.05);transform-origin:50% 60%}
-  .hero__in{min-height:max(860px,100svh);padding-top:120px;padding-bottom:48px;display:flex;flex-direction:column;justify-content:space-between}
+  .hero__in{min-height:max(640px,100svh);padding-top:120px;padding-bottom:48px;display:flex;flex-direction:column;justify-content:space-between}
   .hero h1{font-size:clamp(46px,6.4vw,100px);max-width:11.2em;line-height:.92}
   .hero__text{margin:0}
-  .hero__bottom{display:flex;justify-content:space-between;align-items:flex-end;gap:40px}
+  .hero__bottom{display:flex;justify-content:flex-end;align-items:flex-end;gap:40px}
   .hero__cta{max-width:380px}
   .lead{margin:0 0 26px}
   .stats{display:flex;width:min(600px,100%);max-width:none;padding:6px 0;border-radius:26px;background:rgba(255,255,255,.06);box-shadow:var(--shadow)}
@@ -466,12 +466,14 @@ h1,h2{overflow-wrap:break-word}
   .poster{transition:flex-grow .65s var(--ease),min-height .5s var(--ease),filter .45s ease,border-color .3s,transform .5s var(--ease)}
 }
 
-/* три уровня проверки: в покое темнее, при наведении (на телефоне: у карточки в центре экрана) светлеют */
+/* три уровня проверки: затемнены все, кроме активной (на телефоне: карточка в центре экрана) */
 .level::before{background:linear-gradient(180deg,rgba(7,10,15,.52) 0,rgba(7,10,15,.72) 38%,rgba(7,10,15,.94) 72%,rgba(7,10,15,.98) 100%)}
+/* на компьютере: светлая (.is-on) — первая карточка с самого начала, затем та, на которую наводились последней;
+   остальные затемнены. Класс ставит main.js при наведении/фокусе и не снимает при уходе курсора */
 @media (hover:hover){
-  .level{filter:brightness(.4) saturate(.7)}
-  .level:hover{filter:none}
-  .level:hover::before{opacity:.6}
+  .level,.level:hover{filter:brightness(.4) saturate(.7)}
+  .level.is-on,.level.is-on:hover{filter:none}
+  .level.is-on::before{opacity:.6}
 }
 @media (hover:none){
   .level{filter:brightness(.4) saturate(.7)}
@@ -489,8 +491,9 @@ h1,h2{overflow-wrap:break-word}
 
 
 /* этапы: плавный переход между свёрнутой и открытой карточкой */
-.poster__body{display:block;max-height:0;overflow:hidden;opacity:0;padding-top:0;padding-bottom:0;transition:max-height .6s var(--ease),opacity .4s ease,padding .6s var(--ease)}
-.poster.is-open .poster__body{max-height:320px;opacity:1;padding-bottom:28px;animation:none;transition:max-height .6s var(--ease) .1s,opacity .5s ease .2s,padding .6s var(--ease) .1s}
+.poster__body{display:block;max-height:0;min-height:0;overflow:hidden;opacity:0;padding-top:0;padding-bottom:0;transition:max-height .6s var(--ease),min-height .6s var(--ease),opacity .4s ease,padding .6s var(--ease)}
+/* --pbody (считает fx.js) — высота описания у эталонной панели: заголовок раскрытой панели стоит на одной высоте у всех */
+.poster.is-open .poster__body{max-height:320px;min-height:var(--pbody,0px);opacity:1;padding-bottom:28px;animation:none;transition:max-height .6s var(--ease) .1s,min-height .6s var(--ease) .1s,opacity .5s ease .2s,padding .6s var(--ease) .1s}
 @keyframes titleOpen{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 @keyframes titleClose{from{opacity:0}to{opacity:1}}
 .poster.is-open .poster__t,.poster.is-open .poster__tag{animation:titleOpen .5s var(--ease) .15s both}
@@ -518,3 +521,64 @@ h1,h2{overflow-wrap:break-word}
 @media (min-width:721px){
   .hs[data-id="ecu"] .hs__label{transform:translateX(calc(-50% - 56px))}
 }
+#about .sec__head {
+  display: block;
+}
+
+#about h2 {
+  max-width: none;
+}
+
+#about .sec__head p {
+  margin-top: 20px;
+  max-width: 800px;
+}
+
+/* этапы (компьютер): текст раскрытой панели сразу верстается по итоговой ширине (--pw из fx.js),
+   поэтому при раскрытии строки не перестраиваются и заголовок не дёргается */
+@media (min-width:901px){
+  .poster.is-open .poster__head,.poster.is-open .poster__body{width:var(--pw,100%);flex:none}
+}
+
+/* «Проверка»: заголовок расположен так же, как в блоке «Харбин» — две широкие строки, ниже текст;
+   иероглифы остаются фоновой надписью справа */
+#check .sec__head{display:block;position:relative}
+#check h2{max-width:none;position:relative;z-index:1}
+@media (min-width:721px){#check h2{font-size:clamp(36px,5.6vw,84px)}} /* чуть меньше, чтобы «ПРОВЕРКИ ДО ОТПРАВКИ» помещалось в одну строку */
+#check .sec__head p{margin-top:20px;max-width:800px;padding-top:8px;position:relative;z-index:1}
+#check .zh{position:absolute;right:0;top:14px;margin:0;z-index:0;pointer-events:none}
+
+/* «Харбин»: карточки выезжают по очереди и чередуются.
+   Компьютер: 1 — сверху, 2 — снизу, 3 — сверху, 4 — снизу. Телефон (до 720px): 1 — слева, 2 — справа, 3 — слева, 4 — справа.
+   Начало быстрое, к концу замедляется. Дальность выезда — --fx / --fy, задержка между карточками — --cd */
+.js .col.reveal{transform:none;--fx:0px;--fy:-90px}
+.js .col.reveal:nth-child(even){--fy:90px}
+.js .col.reveal:nth-child(2){--cd:.12s}
+.js .col.reveal:nth-child(3){--cd:.24s}
+.js .col.reveal:nth-child(4){--cd:.36s}
+.js .col.reveal.in{animation:colSlide 1.3s cubic-bezier(.16,1,.3,1) var(--cd,0s) backwards}
+@keyframes colSlide{from{opacity:0;transform:translate(var(--fx),var(--fy))}to{opacity:1;transform:none}}
+@media (max-width:720px){
+  .js .col.reveal{--fx:-110px;--fy:0px}
+  .js .col.reveal:nth-child(even){--fx:110px;--fy:0px}
+}
+@media (prefers-reduced-motion:reduce){.js .col.reveal.in{animation:none}}
+
+/* телефон: заголовки блоков не меняют перенос строк при появлении
+   (на компьютере межбуквенный интервал плавно сжимается, на узком экране из-за этого строки перестраивались) */
+@media (max-width:720px){
+  .js .reveal h2,.js .reveal.in h2{letter-spacing:-.04em;transition:none}
+}
+
+/* этапы на телефоне: плавное раскрытие карточки.
+   Панель всегда выравнивается по верху, отступы и номер меняются плавно, поэтому заголовок едет вниз к своему месту
+   одним движением, а не прыгает (раньше: выравнивание по низу переключалось мгновенно) */
+@media (max-width:900px){
+  .poster,.poster.is-open{justify-content:flex-start}
+  .poster__head,.poster.is-open .poster__head{min-height:104px;transition:padding .5s var(--ease)}
+  .poster__n{top:52px;transition:color .4s,-webkit-text-stroke-width .4s,-webkit-text-stroke-color .4s,top .5s var(--ease),transform .5s var(--ease)} /* 52px = половина свёрнутой карточки (104px): номер не зависит от растущей высоты */
+  .poster.is-open .poster__body{min-height:0}
+}
+
+/* кнопка «Получить расчёт»: симметричные отступы, текст строго по центру */
+.form .btn--lg{padding-left:28px;padding-right:28px;justify-content:center;text-align:center}

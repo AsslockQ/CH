@@ -36,3 +36,33 @@
     h.addEventListener('mouseleave', () => stage.classList.remove('is-hover'));
   });
 })();
+
+/* Этапы: заголовок раскрытой панели на одной высоте у всех панелей.
+   Эталон — вторая панель: берём высоту её описания и задаём её как минимальную остальным. */
+(() => {
+  const box = document.querySelector('.posters');
+  const ps = box ? [...box.querySelectorAll('.poster')] : [];
+  const ref = ps[1];
+  if (!ref) return;
+  const st = document.createElement('style');
+  st.textContent = '.poster--measure,.poster--measure *{transition:none!important;animation:none!important}';
+  document.head.appendChild(st);
+  const sync = () => {
+    // невидимая копия раскрытой панели нужной ширины — меряем описание эталона
+    const w = document.createElement('article');
+    w.className = 'poster is-open poster--measure';
+    w.appendChild(ref.querySelector('.poster__body').cloneNode(true));
+    box.appendChild(w);
+    const grow = parseFloat(getComputedStyle(w).flexGrow) || 1;
+    const gap = parseFloat(getComputedStyle(box).columnGap) || 0;
+    const wide = matchMedia('(min-width:901px)').matches;
+    const width = wide ? (box.clientWidth - gap * (ps.length - 1)) * grow / (grow + ps.length - 1) : box.clientWidth;
+    w.style.cssText = `position:absolute;left:-9999px;top:0;visibility:hidden;flex:none;height:auto;min-height:0;width:${width}px`;
+    box.style.setProperty('--pbody', w.firstChild.offsetHeight + 'px');
+    box.style.setProperty('--pw', Math.round(width - 2) + 'px'); // итоговая ширина (без рамки): текст сразу верстается по ней и не перестраивается во время раскрытия
+    w.remove();
+  };
+  sync();
+  addEventListener('resize', sync);
+  if (document.fonts) document.fonts.ready.then(sync);
+})();

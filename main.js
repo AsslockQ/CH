@@ -26,7 +26,17 @@
   const io = new IntersectionObserver(es => es.forEach(e => {
     if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
   }), { threshold: .12, rootMargin: '0px 0px -40px 0px' });
-  $$('.reveal').forEach(el => io.observe(el));
+  $$('.reveal:not(.col)').forEach(el => io.observe(el));
+  // карточки «Харбин» запускаем позже остальных: когда они поднялись выше нижней трети экрана,
+  // чтобы выезд был виден целиком. Карточки одной строки стартуют вместе.
+  const cols = $$('.col');
+  const rowTop = c => Math.round(c.offsetTop - parseFloat(getComputedStyle(c).marginTop));
+  const colIO = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    const r = rowTop(e.target);
+    cols.filter(c => rowTop(c) === r).forEach(c => { c.classList.add('in'); colIO.unobserve(c); });
+  }), { threshold: .2, rootMargin: '0px 0px -30% 0px' });
+  cols.forEach(c => colIO.observe(c));
   const tio = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); }), { threshold: .4 });
   tio.observe($('#timeline'));
 
